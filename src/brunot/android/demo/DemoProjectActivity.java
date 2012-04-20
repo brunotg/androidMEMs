@@ -1,8 +1,11 @@
 package brunot.android.demo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class DemoProjectActivity extends Activity {
@@ -26,5 +29,17 @@ public class DemoProjectActivity extends Activity {
         listView.setAdapter(adapter);
         */
         setContentView(R.layout.main);
+        //ListView listView = (ListView) findViewById(R.id.lstOptions);
+        //listView.setClickable(true);
+     
+    
+     //http://stackoverflow.com/questions/5994451/android-how-to-make-the-items-from-listview-opens-to-diff-activity-intent
+   
     }
 }
+
+/*<activity
+            android:name=".DemoProjectActivity"
+            android:label="@string/app_name" 
+            android:debuggable="true">
+ * */ 
