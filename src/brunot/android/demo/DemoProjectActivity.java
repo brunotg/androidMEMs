@@ -35,7 +35,8 @@ public class DemoProjectActivity extends Activity {
             	 
             	switch (position)
             	{
-            		case TEAM_COMMUNICATION:
+            		case TEAM_COMMUNICATION: 
+            			
             			sendMessage(view);
             		break;
             		case TRAVEL_ASSISTANCE:
@@ -61,11 +62,12 @@ public class DemoProjectActivity extends Activity {
     {
     	//An Intent is an object that provides runtime binding between separate components (such as two activities). 
     	//The Intent represents an app’s "intent to do something." You can use an Intent for a wide variety of tasks, but most often they’re used to start another activity.
-    	Intent intent = new Intent(this, DisplayMessageActivity.class); 
+    	//Intent intent = new Intent(this, DisplayMessageActivity.class); 
     //	EditText editText = (EditText)findViewById(R.id.edit_message); 
     	//String message = editText.getText().toString();
     	// carry data in a key , value pair fashion
     	//intent.putExtra(MyFirstActivity.EXTRA_MESSAGE, message);
+    	Intent intent  = new Intent(Intent.ACTION_CALL_BUTTON);
     	startActivity(intent); 
     }
     
@@ -80,10 +82,9 @@ public class DemoProjectActivity extends Activity {
     }
     
     public void mapCurrentLocation(View view)
-    { //http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14
-	   	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14"; 
-    	Uri uri = Uri.parse(mapUri);
-	   	 //Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+    { 
+    	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14"; 
+    	Uri uri = Uri.parse(mapUri); 
 	   	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 	   	 startActivity(intent); 
     }
