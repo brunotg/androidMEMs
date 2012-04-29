@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class DemoProjectActivity extends Activity {
 	
@@ -29,10 +27,10 @@ public class DemoProjectActivity extends Activity {
         super.onCreate(savedInstanceState); 
         
         setContentView(R.layout.main);      //http://stackoverflow.com/questions/5994451/android-how-to-make-the-items-from-listview-opens-to-diff-activity-intent 
-        menuItems = (ListView)findViewById(R.id.lstOptions);     
+        menuItems = (ListView)findViewById(R.id.lstOptions);  
+          
         menuItems.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            	 
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
             	switch (position)
             	{
             		case TEAM_COMMUNICATION: 
@@ -43,7 +41,8 @@ public class DemoProjectActivity extends Activity {
             			mapCurrentLocation(view);
             		break;
             		case REPORTING:
-            			showReportIncidents(view);
+            			registerForContextMenu(view);
+            			//showReportIncidents(view);
             		break;
             		case TWITTER:
             			showTwitterStream(view);
@@ -54,6 +53,24 @@ public class DemoProjectActivity extends Activity {
             	}
             }
         } );
+    }
+    
+    //http://stackoverflow.com/questions/5085760/contextmenu-shows-item-i-have-not-specified-in-context-menu-xml
+    // http://www.stealthcopter.com/blog/2010/04/android-context-menu-example-on-long-press-gridview/
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu, v, menuInfo);
+        
+        menu.setHeaderTitle("Context Menu");  
+        menu.add(0, v.getId(), 0, "Edit Current Report");  
+        menu.add(0, v.getId(), 0, "Save Current Report");
+        menu.add(0, v.getId(), 0, "Agregate Daily Report");
+        
+        //MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.layout.)
+        //inflater.inflate(R.menu.context_menu, menu);
+        //menu.f
+        //menu.setHeaderTitle("Your Options");
     }
 
     // called when the user selects the send button
