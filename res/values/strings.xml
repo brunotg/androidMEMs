@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Welcome!</string>
+    <string name="hello">Welcome to your MEMS!</string>
     <string name="app_name">MEMS</string>
+    <string name="app_long_name">Mobile Emergency Medical System</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
 </resources>

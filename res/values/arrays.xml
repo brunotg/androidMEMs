@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources> 
     <string-array name="menuItemList">
-        <item>Incident alerts</item>
-        <item>Receive guidance</item>
-        <item>Travel assistance</item>
         <item>Team communication</item>
-        <item>Patient/incident inf.</item>
-        <item>Speech capabilities</item> 
+        <item>Travel assistance</item>
+        <item>Medical guidance</item>
+        <item>Reporting</item>
+        <item>Social Stream</item>
+        <item>My Info</item>
+        <item>Settings</item> 
     </string-array> 
 </resources>
