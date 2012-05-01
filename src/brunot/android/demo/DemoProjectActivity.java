@@ -6,10 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class DemoProjectActivity extends Activity {
 	
@@ -27,14 +29,12 @@ public class DemoProjectActivity extends Activity {
         super.onCreate(savedInstanceState); 
         
         setContentView(R.layout.main);      //http://stackoverflow.com/questions/5994451/android-how-to-make-the-items-from-listview-opens-to-diff-activity-intent 
-        menuItems = (ListView)findViewById(R.id.lstOptions);  
-          
+        menuItems = (ListView)findViewById(R.id.lstOptions);   
         menuItems.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) { 
             	switch (position)
             	{
-            		case TEAM_COMMUNICATION: 
-            			
+            		case TEAM_COMMUNICATION:  
             			sendMessage(view);
             		break;
             		case TRAVEL_ASSISTANCE:
@@ -46,8 +46,13 @@ public class DemoProjectActivity extends Activity {
             		break;
             		case TWITTER:
             			showTwitterStream(view);
-            		break;
-            		
+            		break; 
+            		case USER_INFO: 
+            			ComingSoon("User Information");
+            		break;	
+            		case SETTINGS:
+            			ComingSoon("MEMS settings");
+            		break; 
             		default:
             		break;
             	}
@@ -55,24 +60,73 @@ public class DemoProjectActivity extends Activity {
         } );
     }
     
-    //http://stackoverflow.com/questions/5085760/contextmenu-shows-item-i-have-not-specified-in-context-menu-xml
+    // http://stackoverflow.com/questions/5085760/contextmenu-shows-item-i-have-not-specified-in-context-menu-xml
     // http://www.stealthcopter.com/blog/2010/04/android-context-menu-example-on-long-press-gridview/
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu, v, menuInfo);
-        
-        menu.setHeaderTitle("Context Menu");  
-        menu.add(0, v.getId(), 0, "Edit Current Report");  
-        menu.add(0, v.getId(), 0, "Save Current Report");
-        menu.add(0, v.getId(), 0, "Agregate Daily Report");
-        
-        //MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.layout.)
-        //inflater.inflate(R.menu.context_menu, menu);
-        //menu.f
-        //menu.setHeaderTitle("Your Options");
+    	
+        super.onCreateContextMenu(menu, v, menuInfo); 
+        menu.setHeaderTitle("Reporting");  
+        menu.add(0, v.getId(), 0, "Create New Report");
+        menu.add(0, v.getId(), 1, "Edit Ongoing Report");  
+        menu.add(0, v.getId(), 2, "Save Ongoing Report");
+        menu.add(0, v.getId(), 3, "Share Report");
+        menu.add(0, v.getId(), 4, "Agregate Daily Reports"); 
     }
 
+    // keep in mind: you're only showing different views, not really launching new activities here
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+    	switch (item.getOrder())
+    	{
+    		case 0:
+    			AddReport();
+    		break;
+    		case 1:
+    			EditReport();
+        	break;
+    		case 2:
+    			SaveReport();
+    		case 3:
+    			ShareReport();
+    		break;
+    		case 4:
+    			ComingSoon(item.getTitle().toString());
+    		break;
+        	default:
+        		// do nothing
+        	break;
+    			
+    	}	
+    	function1(item.getItemId());
+        return true;
+    }
+    
+    public void ShareReport()
+    {
+    	
+    }
+    
+    public void SaveReport()
+    { 
+    	Toast.makeText(this, "The current report has been saved to your mems", Toast.LENGTH_LONG).show();
+    }
+    
+    public void ComingSoon(String menuOption)
+    {
+    	Toast.makeText(this, menuOption+" is coming soon to your MEMS!, see the next update!", Toast.LENGTH_SHORT).show();
+    }
+    
+    public void function1(int id)
+    {
+    	Toast.makeText(this, "function 1 was called"+Integer.toString(id), Toast.LENGTH_SHORT).show();
+    }   
+    
+    public void function2(int id)
+    {
+    	Toast.makeText(this, "function 2 was called", Toast.LENGTH_SHORT).show();
+    }
+    
     // called when the user selects the send button
     // this must be public -> have a void return value -> have a view
     public void sendMessage(View view)
@@ -80,14 +134,14 @@ public class DemoProjectActivity extends Activity {
     	//An Intent is an object that provides runtime binding between separate components (such as two activities). 
     	//The Intent represents an appÕs "intent to do something." You can use an Intent for a wide variety of tasks, but most often theyÕre used to start another activity.
     	//Intent intent = new Intent(this, DisplayMessageActivity.class); 
-    //	EditText editText = (EditText)findViewById(R.id.edit_message); 
-    	//String message = editText.getText().toString();
+    	//EditText editText = (EditText)findViewById(R.id.edit_message); 
+    	// String message = editText.getText().toString();
     	// carry data in a key , value pair fashion
-    	//intent.putExtra(MyFirstActivity.EXTRA_MESSAGE, message);
+    	// intent.putExtra(MyFirstActivity.EXTRA_MESSAGE, message);
     	Intent intent  = new Intent(Intent.ACTION_CALL_BUTTON);
     	startActivity(intent); 
     }
-    
+    //https://docs.google.com/document/d/1dJBkS67CGnWBRyvy6xOUuQ3e_Ly6nw4-2XiRB0BMKJo/edit
     public void showReportIncidents(View view)
     { 
     	
@@ -97,13 +151,30 @@ public class DemoProjectActivity extends Activity {
 	   //	intent.putExtra(ReportActivity.FIRST_REPORT, stImg);
 	   	startActivity(intent);
     }
+    // new report link > https://docs.google.com/document/d/1MvUtYI0V57zo7inziDJqEpJaEjiWpfbXHRrmbMT-RRA/edit
+    
+    public void EditReport()
+    {
+    	String mapUri="https://docs.google.com/document/d/1dJBkS67CGnWBRyvy6xOUuQ3e_Ly6nw4-2XiRB0BMKJo/edit"; 
+    	Uri uri = Uri.parse(mapUri); 
+	   	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+	   	startActivity(intent); 
+    }
+    
+    public void AddReport()
+    {
+    	String mapUri="https://docs.google.com/document/d/1MvUtYI0V57zo7inziDJqEpJaEjiWpfbXHRrmbMT-RRA/edit"; 
+    	Uri uri = Uri.parse(mapUri); 
+	   	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+	   	startActivity(intent); 
+    }
     
     public void mapCurrentLocation(View view)
     { 
     	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14"; 
     	Uri uri = Uri.parse(mapUri); 
 	   	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-	   	 startActivity(intent); 
+	   	startActivity(intent); 
     }
     
     public void showTwitterStream(View view)
@@ -119,24 +190,4 @@ public class DemoProjectActivity extends Activity {
     	  
     }
     
-    protected void onListItemClick(ListView l, View v, int position, long id)
-    {
-    	//super.onListItemClick(l,v,position, id);
-    	Intent intent = new Intent();
-	   	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14"; 
-    	Uri uri = Uri.parse(mapUri);
-    	// launch the view based on the intent clicked
-    	switch (position)
-    	{
-    		case TEAM_COMMUNICATION:
-    			intent.setClass(this,DisplayMessageActivity.class);
-    		break;
-    		case TRAVEL_ASSISTANCE: 
-    			intent = new Intent(Intent.ACTION_VIEW, uri);
-    		break;  
-    		default:
-    		break;
-    	}
-    	//startActivityForResult(intent, position);
-    }
 }
