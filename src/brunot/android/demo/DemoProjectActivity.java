@@ -95,16 +95,14 @@ public class DemoProjectActivity extends Activity {
     		break;
         	default:
         		// do nothing
-        	break;
-    			
-    	}	
-    	function1(item.getItemId());
+        	break; 
+    	}	 
         return true;
     }
     
     public void ShareReport()
     {
-    	
+    	ComingSoon("You should be able to share this report with your EMT team.");
     }
     
     public void SaveReport()
@@ -171,7 +169,7 @@ public class DemoProjectActivity extends Activity {
     
     public void mapCurrentLocation(View view)
     { 
-    	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Fire+Department,+Moffett+Field,+CA&daddr=Hospital+Drive,+Mountain+View,+CA&hl=en&sll=37.369356,-122.081749&sspn=0.00671,0.012242&geocode=FZTrOgIdVZu5-CF0VNNVTca95A%3BFQw2OgIdKy65-CktxL6R0raPgDHlukgsNN0tng&oq=Moff&mra=ls&t=m&z=14"; 
+    	String mapUri="http://maps.google.com/maps?saddr=NASA+Ames+Research+Park&daddr=2500+Grant+Road,+Mountain+View,+CA+94040+(El+Camino+Hospital)&hl=en&sll=37.389663,-122.071838&sspn=0.053669,0.09347&geocode=FTXUOgIdtHW5-CG1Rbs_4GW8FQ%3BFec0OgIdPjS5-CECtCrTJjkO6Q&oq=El+Camino+Hospital,+250&mra=ls&t=m&z=14"; 
     	Uri uri = Uri.parse(mapUri); 
 	   	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 	   	startActivity(intent); 
